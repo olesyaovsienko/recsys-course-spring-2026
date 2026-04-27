@@ -1,0 +1,54 @@
+{
+  "all_effects": [
+    {
+      "treatment": "T1",
+      "metric": "time",
+      "control_mean": 21.5521,
+      "treatment_mean": 27.3918,
+      "effect_pct": 27.1,
+      "lower_pct": 24.12,
+      "upper_pct": 30.07,
+      "significant": true
+    },
+    {
+      "treatment": "T1",
+      "metric": "sessions",
+      "control_mean": 3.1574,
+      "treatment_mean": 3.1379,
+      "effect_pct": -0.62,
+      "lower_pct": -2.66,
+      "upper_pct": 1.43,
+      "significant": false
+    },
+    {
+      "treatment": "T1",
+      "metric": "mean_request_latency",
+      "control_mean": 0.7037,
+      "treatment_mean": 19.142,
+      "effect_pct": 2620.01,
+      "lower_pct": 2588.73,
+      "upper_pct": 2651.3,
+      "significant": true
+    },
+    {
+      "treatment": "T1",
+      "metric": "mean_tracks_per_session",
+      "control_mean": 11.9156,
+      "treatment_mean": 14.0643,
+      "effect_pct": 18.03,
+      "lower_pct": 16.75,
+      "upper_pct": 19.31,
+      "significant": true
+    },
+    {
+      "treatment": "T1",
+      "metric": "mean_time_per_session",
+      "control_mean": 6.94,
+      "treatment_mean": 9.081,
+      "effect_pct": 30.85,
+      "lower_pct": 28.77,
+      "upper_pct": 32.93,
+      "significant": true
+    }
+  ]
+}

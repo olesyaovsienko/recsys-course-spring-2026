@@ -16,6 +16,7 @@ from botify.recommenders.i2i import I2IRecommender
 from botify.recommenders.random import Random
 from botify.recommenders.indexed import Indexed
 from botify.recommenders.sticky_artist import StickyArtist
+from botify.recommenders.contextual import ContextualRecommender
 from botify.track import Catalog
 
 root = logging.getLogger()
@@ -74,6 +75,18 @@ sasrec_i2i_recommender = I2IRecommender(
     random_recommender,
 )
 
+embeddings_path = app.config.get("EMBEDDINGS_FILE_PATH", "./data/embeddings.npy")
+contextual_recommender = ContextualRecommender(
+    listen_history_redis=listen_history_redis.connection,
+    hstu_redis=recommendations_hstu_redis.connection,
+    i2i_redis=recommendations_contextual_redis.connection,
+    track_redis=tracks_redis.connection,
+    catalog=catalog,
+    embeddings_path=embeddings_path,
+    fallback_recommender=sasrec_i2i_recommender,
+    artist_penalty=0.5,
+)
+
 parser = reqparse.RequestParser()
 parser.add_argument("track", type=int, location="json", required=True)
 parser.add_argument("time", type=float, location="json", required=True)
@@ -117,7 +130,7 @@ class NextTrack(Resource):
         if treatment == Treatment.C:
             recommender = sasrec_i2i_recommender
         elif treatment == Treatment.T1:
-            recommender = Indexed(recommendations_hstu_redis.connection, catalog, random_recommender)
+            recommender = contextual_recommender
         else:
             recommender = random_recommender
 

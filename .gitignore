@@ -5,6 +5,7 @@ __pycache__
 botify/log/*
 botify/data/*.json
 !botify/data/tracks.json
+botify/data/embeddings.npy
 .DS_Store
 
 # LaTeX
@@ -33,3 +34,5 @@ botify/data/*.json
 *.synctex.gz
 *.nav
 *.snm
+sim/data/embeddings.npy
+botify/data/embeddings.npy
