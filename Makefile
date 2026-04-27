@@ -13,6 +13,16 @@ setup:
 	$(PIP) install --upgrade pip --timeout 120 -q
 	$(PIP) install -r sim/requirements.txt --timeout 120 -q
 	$(PIP) install -r botify/requirements.txt --timeout 120 -q
+	@if [ -f ../course/sim/data/embeddings.npy ] && [ $$(wc -c < ../course/sim/data/embeddings.npy) -gt 1000 ]; then \
+		echo "Copying sim data from course repo..."; \
+		cp ../course/sim/data/embeddings.npy sim/data/embeddings.npy; \
+		cp ../course/sim/data/tracks.json    sim/data/tracks.json; \
+		cp ../course/sim/data/users.json     sim/data/users.json; \
+	fi
+	@if [ -f sim/data/embeddings.npy ] && [ $$(wc -c < sim/data/embeddings.npy) -gt 1000 ]; then \
+		cp sim/data/embeddings.npy botify/data/embeddings.npy; \
+		echo "Copied embeddings to botify/data/"; \
+	fi
 	cd botify && docker compose down -v --remove-orphans 2>/dev/null || true
 	cd botify && docker compose up -d --build --force-recreate --scale recommender=2
 	sleep 20
