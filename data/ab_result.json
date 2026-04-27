@@ -50,5 +50,8 @@
       "upper_pct": 32.93,
       "significant": true
     }
-  ]
+  ],
+  "beat_control": true,
+  "significant": true,
+  "lift_pct": 30.85
 }

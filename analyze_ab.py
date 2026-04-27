@@ -145,8 +145,19 @@ def main():
 
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
+
+    key_metric = next((e for e in effects if e["metric"] == "mean_time_per_session"), None)
+    beat_control = key_metric is not None and key_metric["effect_pct"] > 0
+    significant = key_metric is not None and key_metric.get("significant", False)
+    lift_pct = key_metric["effect_pct"] if key_metric else None
+
     with open(out, "w") as f:
-        json.dump({"all_effects": effects}, f, indent=2, ensure_ascii=False)
+        json.dump({
+            "all_effects": effects,
+            "beat_control": beat_control,
+            "significant": significant,
+            "lift_pct": lift_pct,
+        }, f, indent=2, ensure_ascii=False)
     print(f"\n💾 {out}")
 
 
