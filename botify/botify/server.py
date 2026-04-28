@@ -80,7 +80,6 @@ contextual_recommender = ContextualRecommender(
     listen_history_redis=listen_history_redis.connection,
     hstu_redis=recommendations_hstu_redis.connection,
     i2i_redis=recommendations_contextual_redis.connection,
-    track_redis=tracks_redis.connection,
     catalog=catalog,
     embeddings_path=embeddings_path,
     fallback_recommender=sasrec_i2i_recommender,
